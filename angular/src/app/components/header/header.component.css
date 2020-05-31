@@ -1,0 +1,11 @@
+:host{
+ 
+    align-content: center;
+    background-color: midnightblue;
+    color: white;
+    display: grid;
+    font-size: 2em;
+    grid-template-columns: repeat(auto-fit,minmax(10em,1fr));
+    height: 3em;
+    padding-left: 1em;
+}
