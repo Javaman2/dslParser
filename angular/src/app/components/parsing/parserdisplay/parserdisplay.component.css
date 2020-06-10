@@ -1,0 +1,11 @@
+:host {
+  padding: 1em;
+  line-height: 0.1em;
+  background: black;
+  color: white;
+}
+.blue{
+  color: white;
+  background-color: darkblue;
+}
+ 

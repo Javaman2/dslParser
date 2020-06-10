@@ -1,0 +1,29 @@
+ <mat-tab-group>
+   <div id='mattab'>test</div>
+  
+   <mat-tab *ngFor="let item of data; index as i" [label]="i">
+     <ng-template mat-tab-header>
+       test
+     </ng-template>
+     <ng-template mat-tab-label>
+       <div class='mt'>
+         {{i}}
+       </div>
+     </ng-template>
+     <div class='margin1em'>
+       <div>HREF :{{item.href}}</div>
+       <div>Disabled :{{item.disabled}}</div>
+       <div>OwnerNode: {{item.ownerNode.value}}</div>
+       <div>Media: {{item.media}}</div>
+       <div>Owner Rule: {{item.ownerRule}}</div>
+       <div>Parent SS:{{item.parentStyleSheet}}</div>
+       <div>Type: {{item.type}}</div>
+       <div class='rules'>Rules:
+         <div *ngFor="let rule of getRules(item)">
+           <div [class]='getStyle(rule.cssText)'> {{rule.cssText}} </div>
+         </div>
+       </div>
+     </div>
+   </mat-tab>
+
+ </mat-tab-group>

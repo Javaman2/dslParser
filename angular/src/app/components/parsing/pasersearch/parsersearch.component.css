@@ -1,0 +1,63 @@
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+:host {
+  background-color: #eee;
+  border-radius: 5px;
+  display: grid;
+  padding: 1em;
+}
+mat-spinner {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  justify-self: end;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.searchsort {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+}
+.selectsearchsort {
+  display: grid;
+  grid-template-rows: 1fr;
+  
+}
+
+.spin {
+  animation-name: spin;
+  animation-duration: 100ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  color: red;
+}
+#searchGrid {
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px grey;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 4em 1fr;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+  padding-bottom: 0.6em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.6em;
+  width: 50em;
+}
+
+label{
+  font-weight: 600;
+}

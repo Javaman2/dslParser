@@ -1,0 +1,22 @@
+<mat-spinner diameter='20' style="width: 20px; height:20px;" mode='indeterminate'></mat-spinner>
+<div class='selectsearchsort'>
+  <!-- <select (change)='onSelectChanged($event)'>
+    <option *ngFor="let key of getKeys()">{{ key }}</option>
+  </select> -->
+  <div class='searchsort'>
+    <div>
+      <label>Search </label>
+      <input #searchInput (keyup)='onSearchKeyDown($event,searchInput)' />
+    </div>
+    <!-- <div>
+      <label>Sort </label>
+      <input type="checkbox" (checked)="sort" />
+    </div> -->
+  </div>
+</div>
+
+<!-- <app-mattab *ngIf='filtered' label='Filtered' data='filtered'></app-mattab>
+  <app-mattab *ngIf='allClasses' label='Classes' data='allClasses'></app-mattab>
+  <app-mattab *ngIf='allIds' label='IDs' data='allIds'></app-mattab>
+  <app-mattab *ngIf="allBrackets" label='Brackets' data='allBrackets'></app-mattab>
+  <app-mattab *ngIf="allBoxShadows" label='Box Shadows' data='allBoxShadows'></app-mattab> -->
