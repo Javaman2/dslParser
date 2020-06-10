@@ -1,5 +1,6 @@
 <div>
-  <input #input type="text" placeholder="Type message here" />
-  <button (click)='onButtonClicked(input)'>Test</button>
+  <input #msginput type="text" placeholder="Type message here"  />
+  <button (click)='onButtonClicked(msginput)'>Test</button>
+  <button (click)='onClearClicked()'>Clear</button>
 </div>
 <textarea>{{stringified}}</textarea>

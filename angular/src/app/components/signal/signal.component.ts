@@ -21,11 +21,11 @@ export class SignalComponent implements OnInit, AfterViewInit {
   connection: HubConnection;
   messages: Array<string> = new Array();
   stringified: string;
+  currentmessage: string = "Welcome!";
 
   ngOnInit(): void {}
   ngAfterViewInit() {
-    this.CheckHubConnection();
-    this.messages.push("Welcome!");
+    this.CheckHubConnection();    
   }
   private async CheckHubConnection() {
     let secure = "https://localhost:44344/myHub";
@@ -39,21 +39,41 @@ export class SignalComponent implements OnInit, AfterViewInit {
         console.log({ signalRComponent: error });
         return;
       });
-
-      this.connection.on("ReceiveMessage", (msg) => {
-        this.messages.unshift(msg);
-        this.stringified = this.messages.reduce((acc, item) => {
-          return acc + "\n" + item;
-        });
-        this.cdf.detectChanges();
-      });
-      this.connection.on("SendMessage", (msg) => {});
+      this.hookEventHandlers();
     }
   }
 
-  async onButtonClicked(input: HTMLInputElement) {
-    await this.CheckHubConnection();
-    console.log(this.connection);
-    this.connection.invoke("SendMessage", "clientstation1", "test");
+  private hookEventHandlers() {
+    this.connection.on("ReceiveMessage", (msg, msg2) => {
+      let now = Date.now();
+      let time = new Date(now).toLocaleTimeString();
+      this.messages.unshift(`${time}  |  ${msg}  : ${msg2}`);
+      this.stringified = this.messages.reduce((acc, item) => {
+        return acc + "\n" + item;
+      });
+      this.cdf.detectChanges();
+    });
+    this.connection.on("SendMessage", (msg) => {
+      debugger;
+    });
+  }
+  onClearClicked(){
+    this.stringified="";
+    this.messages = new Array();
+  }
+  onButtonClicked(msginput: HTMLInputElement) {
+    if (!msginput.value) {
+      msginput.placeholder = "Please enter message here";
+      msginput.style.boxShadow = "1px 1px 3px inset red";
+
+      setTimeout(() => {
+        msginput.style.boxShadow = "";
+      }, 1000);
+
+      return;
+    }
+    this.CheckHubConnection();
+    this.connection.invoke("SendMessage", "Signal Component", msginput.value);
+    this.currentmessage = "";
   }
 }
