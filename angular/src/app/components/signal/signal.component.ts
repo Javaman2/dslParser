@@ -64,7 +64,7 @@ export class SignalComponent implements OnInit, AfterViewInit {
   onButtonClicked(msginput: HTMLInputElement) {
     if (!msginput.value) {
       msginput.placeholder = "Please enter message here";
-      msginput.style.boxShadow = "1px 1px 3px inset red";
+      msginput.style.boxShadow = "0px 0px 20em red";
 
       setTimeout(() => {
         msginput.style.boxShadow = "";

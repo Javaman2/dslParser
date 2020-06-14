@@ -3,12 +3,12 @@
     grid-template-rows: repeat(auto-fit,minmax(1em, 1fr));
 }
 textarea {
-    width: 41em;
+    width: 42em;
     height: 50em;
 }
  
 button {
-    box-shadow: -1px -1px 2px inset midnightblue;
+    box-shadow: -.1px -.1px 1px inset midnightblue;
     width: 7em;
     height: 2em;
     margin-left: .5em;
@@ -17,7 +17,6 @@ button:active{
     box-shadow: -1px -1px 2px inset gray;
 }
 input{
-    box-shadow: -1px -1px 2px inset midnightblue;
     width: 27em;
     height: 1.6em;
     margin-top: 0.5em;

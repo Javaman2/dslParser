@@ -1,15 +1,16 @@
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { BrowserModule } from "@angular/platform-browser";
-import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserModule } from "@angular/platform-browser";
 import { FooterComponent } from "./components/footer/footer.component";
 import { HeaderComponent } from "./components/header/header.component";
+import { HttpClientModule } from "@angular/common/http";
+import { ImportCustomLibraryComponent } from "./components/importcustomlibrary/importcustomlibrary.component";
+import { MatTableModule } from "@angular/material/table";
 import { NgModule } from "@angular/core";
 import { ParserModule } from "./components/parsing/parser.module";
-import { MatTableModule } from "@angular/material/table";
 import { SignalComponent } from "./components/signal/signal.component";
-import { HttpClientModule } from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
@@ -17,14 +18,18 @@ import { HttpClientModule } from "@angular/common/http";
     FooterComponent,
     HeaderComponent,
     SignalComponent,
+    ImportCustomLibraryComponent,
   ],
   imports: [
+   
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     MatTableModule,
     ParserModule,
+  ],
+  exports:[
   
   ],
   providers: [],

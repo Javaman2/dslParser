@@ -8,6 +8,7 @@
        
     },
     "exclude": [
+        "src/angular-library",
         "node_modules",
         "**/node_modules/*"
     ]
