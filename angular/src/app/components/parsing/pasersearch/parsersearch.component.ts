@@ -26,8 +26,10 @@ export class ParserSearchComponent implements OnInit, AfterViewInit {
   matchlength = 0;
   matches = `Matches ${this.matchlength}`;
   results: any;
-  show = true;
+  show = false;
   sort = true;
+  pagesParsed: number;
+  styleRuleCount: number;
 
   constructor(private cdf: ChangeDetectorRef, private es: EventsService) {}
 
@@ -49,6 +51,10 @@ export class ParserSearchComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.es.styleSheetRules.subscribe((data) => {
       this.data = [].concat(...data);
+      setTimeout(() => {
+        this.pagesParsed = data.length;
+        this.styleRuleCount = data.flat().length;
+      }, 10);
     });
   }
   ngAfterViewInit() {
@@ -76,6 +82,7 @@ export class ParserSearchComponent implements OnInit, AfterViewInit {
   }
   private async search(input: any) {
     let searchkey = input.value;
+    console.log({ Search: input.value });
     let regex = new RegExp(`${searchkey}`, "g");
     await this.runSearch(regex);
   }
@@ -90,8 +97,10 @@ export class ParserSearchComponent implements OnInit, AfterViewInit {
     // }
     // this.filtered = this.addNewLines(matches);
     // console.log({ matches });
-    this.filtered = matches;
-    this.es.searchFilterData.emit(matches);
+    if (matches) {
+      this.filtered = this.data.filter((item) => regex.exec(item.cssText));
+    }
+
     let ready = await from(matches);
     // this.cdf.detectChanges();
   }

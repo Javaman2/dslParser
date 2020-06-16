@@ -1,5 +1,13 @@
-import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  AfterViewInit,
+  ViewChild,
+} from "@angular/core";
 import { EventsService } from "./../services/events.service";
+import { MatInkBar } from "@angular/material/tabs";
+import { _MAT_INK_BAR_POSITIONER_FACTORY } from "@angular/material/tabs/ink-bar";
 
 @Component({
   selector: "app-parser-tab",
@@ -13,7 +21,7 @@ export class ParserTabComponent implements OnInit, AfterViewInit {
   @Input("data") data: StyleSheetList;
   displayedColumns: ["href"];
   constructor(private es: EventsService) {}
-
+  @ViewChild(MatInkBar) inkbar: MatInkBar;
   ngOnInit(): void {
     this.es.styleSheets.subscribe((data) => {
       setTimeout(() => {
@@ -21,6 +29,34 @@ export class ParserTabComponent implements OnInit, AfterViewInit {
         this.data = temp;
       }, 10);
     });
+  }
+  ngAfterViewInit() {
+    let tabWidth = "3em";
+    this.seLabelWidth(tabWidth);
+    this.setInkBarWidth(tabWidth);
+  }
+  private seLabelWidth(tabWidth: string) {
+    let mtlabel = document.getElementsByClassName(
+      "mat-tab-labels"
+    )[0] as HTMLElement;
+
+    //this.getLabelWidth();
+    mtlabel.style.display = "grid";
+    mtlabel.style.gridTemplateColumns = this.getcolumntemplate(tabWidth);
+    mtlabel.style.content = "61:parseTab";
+  }
+
+  getLabelWidth() {
+    let lblContent = document.getElementsByClassName(
+      "mat-tab-label-content"
+    )[0];
+    debugger;
+    if (!lblContent) {
+      setTimeout(() => {
+        this.getLabelWidth();
+      }, 100);
+    }
+    debugger;
   }
   getRules(item: CSSStyleSheet) {
     try {
@@ -50,32 +86,32 @@ export class ParserTabComponent implements OnInit, AfterViewInit {
     }
     return "c5";
   }
-  ngAfterViewInit() {
-    let tabWidth = '3em';
-    this.setdelayedInkBarWidth(tabWidth);
-    let mtlabel = document.getElementsByClassName(
-      "mat-tab-labels"
-    )[0] as HTMLElement;
-    mtlabel.style.display = "grid";
-    mtlabel.style.gridTemplateColumns = this.getcolumntemplate(tabWidth);
-    mtlabel.style.content="61:parseTab";
-    mtlabel.addEventListener('click', (item)=>{
-      this.setdelayedInkBarWidth(tabWidth);
-    })
-  }
-
-  private setdelayedInkBarWidth(tabWidth) {
-    setTimeout(() => {
-      this.setInkBarWidth(tabWidth);
-    }, 10);
-  }
 
   private setInkBarWidth(tabWidth) {
-    let inkbar = (document.getElementsByTagName('mat-ink-bar')[0]) as HTMLElement;
-    inkbar.style.display='grid'
-    inkbar.style.gridTemplateColumns=this.getcolumntemplate(tabWidth);
+    let inkbar = this.waitForInkBar(tabWidth);
+    inkbar.style.display = "grid";
+    inkbar.style.content = "79:parseTab";
+    inkbar.style.gridTemplateColumns = this.getcolumntemplate(tabWidth);
   }
-  getcolumntemplate(tabWidth){
-    return   `repeat(auto-fit, minmax(${tabWidth}, 1fr))`;
+  private waitForInkBar(tabWidth:SVGAnimatedString) {
+    let inkbar = document.getElementsByTagName("mat-ink-bar")[0] as HTMLElement;
+    if (!inkbar) {
+      setTimeout(() => {
+        this.waitForInkBar;
+      }, 250);
+    }
+
+    inkbar.ontransitionend = (ev) => {
+      setTimeout(() => {
+             let ele =ev.target as HTMLElement;
+      ele.style.width='3em'; 
+      }, 100);
+
+    };
+
+    return inkbar;
+  }
+  getcolumntemplate(tabWidth) {
+    return `repeat(auto-fit, minmax(${tabWidth}, 1fr))`;
   }
 }

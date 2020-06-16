@@ -1,4 +1,4 @@
-<mat-spinner diameter='20' style="width: 20px; height:20px;" mode='indeterminate'></mat-spinner>
+<mat-spinner *ngIf='show' diameter='20' style="width: 20px; height:20px;" mode='indeterminate'></mat-spinner>
 <div class='selectsearchsort'>
   <!-- <select (change)='onSelectChanged($event)'>
     <option *ngFor="let key of getKeys()">{{ key }}</option>
@@ -12,8 +12,15 @@
       <label>Sort </label>
       <input type="checkbox" (checked)="sort" />
     </div> -->
+    <div class='counts'>
+      <label>Style Sheets</label>
+      <span>{{pagesParsed}}</span>
+      <label>Style Rules</label>
+      <span>{{styleRuleCount}}</span>
+    </div>
   </div>
 </div>
+<app-parser-display-presentation [data]='filtered'></app-parser-display-presentation>
 
 <!-- <app-mattab *ngIf='filtered' label='Filtered' data='filtered'></app-mattab>
   <app-mattab *ngIf='allClasses' label='Classes' data='allClasses'></app-mattab>

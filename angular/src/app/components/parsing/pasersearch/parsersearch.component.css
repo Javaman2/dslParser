@@ -16,6 +16,10 @@ mat-spinner {
   display: grid;
   justify-self: end;
 }
+.counts{
+  display: grid;
+  grid-template-columns: 6.3em 2em 5.9em 3em;
+}
 
 @keyframes spin {
   from {
